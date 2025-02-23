@@ -3,12 +3,27 @@
 #include <algorithm>
 #include <forward_list>
 #include "IntArr.h"
+#include "List.h"
 
 using std::cout;
 using std::endl;
 using std::vector;
 
 int main(){
+    MyForwardLists<int> mfl;
+    mfl.Add(5);
+    mfl.Add(-5);
+    mfl.Add(1);
+    mfl.Add(100);
+
+    for (auto a: mfl) {
+        std::cout << a << std::endl;
+    }
+
+
+
+
+
     //vector<int> vec = {10, 20, 0 , -5, 10};
     
 
@@ -34,18 +49,18 @@ int main(){
 
 
 
-    IntArr vec;
-    for(auto it = vec.begin(); it != vec.end(); it++){
-        *it = 1;   
-    }
-    for(auto it = vec.begin(); it != vec.end(); it++){
-        cout << *it << endl;   
-    }
+    // IntArr vec;
+    // for(auto it = vec.begin(); it != vec.end(); it++){
+    //     *it = 1;   
+    // }
+    // for(auto it = vec.begin(); it != vec.end(); it++){
+    //     cout << *it << endl;   
+    // }
 
 
-    for(auto cit = vec.cbegin(); cit != vec.cend(); cit++){
-        cout << *cit << endl;
-    }
+    // for(auto cit = vec.cbegin(); cit != vec.cend(); cit++){
+    //     cout << *cit << endl;
+    // }
  
    
 

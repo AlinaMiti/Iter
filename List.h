@@ -1,70 +1,130 @@
 #include <iostream>
+#include <forward_list>
 
 //добавить удалить определить наличие элемента
-template <class T>
+template <typename T>
 struct Node{
     T Data;
     Node* Next;
+    Node(T data, Node* next) {
+        Data = data;
+        Next = next;
+    }
 };
 
-template <class T>
+template <typename T>
 struct ListIterator{
     using iterator_category = std::forward_iterator_tag;
     using difference_type = std::ptrdiff_t;
-    using value_type = Node<T>;
-    using pointer = Node<T>*;
-    using reference = Node<T>&;
-    ListIterator(Node<T>* node){_node(node)};
+    using value_type = T;
+    using pointer = T*;
+    using reference = T&;
+    ListIterator(Node<T>* node) : _node(node) {}
 
-    ListIterator operator++(Node<T>){
-        ListIterator tmp = *this; //сохранили текущий итератор
+    // ListIterator operator++(Node<T>){
+    //     ListIterator tmp = *this; //сохранили текущий итератор
+    //     ++(*this);
+    //     return tmp;
+    // }
+    // ListIterator operator++(){
+    //     _node++;
+    //     return *this;
+    // }
+
+    reference operator*() {
+        return _node->Data;
+    }
+    pointer operator->() {
+        return &(_node->Data);
+    }
+    
+    ListIterator& operator++() {
+        _node = _node->Next;
+        return *this;
+    }
+
+    ListIterator operator++(int) {
+        ListIterator tmp = *this;
         ++(*this);
         return tmp;
     }
-    ListIterator operator++(){
-        _node++;
-        return *this;
-    }
+
     friend bool operator==(const ListIterator& a, const ListIterator& b){
-        return a._ptr == b._ptr;
+        return a._node == b._node;
     }
     friend bool operator!=(const ListIterator& a, const ListIterator& b){
-        return a._ptr != b._ptr;
+        return a._node != b._node;
     }
 
 private:
-    pointer _node;
+    Node<T>* _node;
 
 };
 
+template <typename T>
+struct ConstListItearator {
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type = ptrdiff_t;
+    using value_type = T;
+    using pointer = const T*;
+    using reference = const T&;
+    ConstListItearator(Node<T>* node) : _node(node) {}
 
-template <class T>
+    reference operator*() {
+        return _node->Data;
+    }
+    pointer operator->() {
+        return &(_node->Data);
+    }
+
+private:
+    Node<T>* _node;
+};
+
+
+template <typename T>
 class MyForwardLists{
     private:
         Node<T>* _head;
-        Node<T>* _hwost; 
+        Node<T>* _tail; 
     public:
 //cbegin, cend сюда
 //указатель на последний элемент. итератор на конец списка  
 
         MyForwardLists(){
-            _head->Data = nullptr;
+            _head = nullptr;
+            _tail = nullptr;
+        }
+
+        void Add(T data){
+            if (_head == nullptr) {
+            _head = new Node<T>(data, nullptr);
+            _tail = _head;
+            } else {
+                _tail->Next = new Node<T>(data, nullptr);
+                _tail = _tail->Next;
+            }
+        }
+        void Delete(T data){
             
         }
-
-        void Add(Node<T> newNode){
-            if (_head = nullptr){
-                _head->Data = newNode;
-                _hwost->Data = newNode;
-            }
-            else{
-
-            }
-        }
-        void Delete(Node<T> node){
-            if (_head = nullptr)
-        }
-        bool Conteins(Node<T> node){
+        bool Conteins(T data){
             return false;
         }
+
+        ListIterator<T> begin() {
+        return ListIterator<T>(_head);
+    }
+
+    ListIterator<T> end() {
+        return ListIterator<T>(_tail->Next);
+    }
+
+    ConstListItearator<T> cbegin() {
+        return ConstListItearator<T>(_tail);
+    }
+
+    ConstListItearator<T> cend() {
+        return ConstListItearator<T>(_tail);
+    }
 };
