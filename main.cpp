@@ -16,6 +16,9 @@ int main(){
     mfl.Add(1);
     mfl.Add(100);
 
+    mfl.Delete(1);
+    std::cout << mfl.Conteins(55);
+
     for (auto a: mfl) {
         std::cout << a << std::endl;
     }

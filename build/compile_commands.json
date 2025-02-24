@@ -1,8 +1,7 @@
 [
 {
-  "directory": "D:/Iterator/Iter/build",
-  "command": "C:\\Users\\alina\\Downloads\\x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0\\mingw64\\bin\\g++.exe   -g -o CMakeFiles\\main.dir\\main.cpp.obj -c D:\\Iterator\\Iter\\main.cpp",
-  "file": "D:/Iterator/Iter/main.cpp",
-  "output": "CMakeFiles/main.dir/main.cpp.obj"
+  "directory": "/home/s23380424@unn.global/Iter/build",
+  "command": "/usr/bin/g++-12   -g -o CMakeFiles/main.dir/main.cpp.o -c /home/s23380424@unn.global/Iter/main.cpp",
+  "file": "/home/s23380424@unn.global/Iter/main.cpp"
 }
 ]

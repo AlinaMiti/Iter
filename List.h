@@ -96,7 +96,7 @@ class MyForwardLists{
             _tail = nullptr;
         }
 
-        void Add(T data){
+        void Add(T data){   
             if (_head == nullptr) {
             _head = new Node<T>(data, nullptr);
             _tail = _head;
@@ -105,26 +105,58 @@ class MyForwardLists{
                 _tail = _tail->Next;
             }
         }
-        void Delete(T data){
+        void Delete(T data){   //с итератором. циклом пройтись итератором
+            if (_head == nullptr){
+                throw "empty";
+            }
+            Node<T>* tmp = _head;
+            Node<T>* a = nullptr;
+            while((tmp != nullptr) && (tmp->Data != data)){
+                a = tmp;
+                tmp = tmp->Next;
+            }
+            if(tmp != nullptr){
+                if(a != nullptr){
+                    a->Next = tmp->Next;
+                }
+                else{
+                    _head = _head->Next;
+                }
+                delete tmp;
+            }
             
         }
-        bool Conteins(T data){
+        bool Conteins(T data){   //есть ли элемент в списке   //с итератором
+            // Node<T>* tmp = _head;
+            // if(tmp->Data != data){
+            //     tmp = tmp->Next;
+            // }
+            // else{
+            //     return true;
+            // }
+            // return false;
+
+            for(ListIterator<T> it = begin();it != end(); ++it){  //с итератором. Также удаление сделать
+                if(*it == data){
+                    return true;
+                }
+            }
             return false;
         }
 
         ListIterator<T> begin() {
-        return ListIterator<T>(_head);
-    }
+            return ListIterator<T>(_head);
+        }
 
-    ListIterator<T> end() {
-        return ListIterator<T>(_tail->Next);
-    }
+        ListIterator<T> end() {
+            return ListIterator<T>(_tail->Next);
+        }
 
-    ConstListItearator<T> cbegin() {
-        return ConstListItearator<T>(_tail);
-    }
+        ConstListItearator<T> cbegin() {
+            return ConstListItearator<T>(_tail);
+        }
 
-    ConstListItearator<T> cend() {
-        return ConstListItearator<T>(_tail);
-    }
+        ConstListItearator<T> cend() {
+            return ConstListItearator<T>(_tail);
+        }
 };
